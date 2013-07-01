@@ -1,5 +1,5 @@
 (function() {
-	var styleSelector = '.main_css',
+	var mainCssSelector = '.main_css',
 		reloadInt = 1000, // refresh time.
 		button_css = "position:fixed;bottom:35px;right:10px;",
 		// no edit beyond here.
@@ -26,7 +26,7 @@
 					auto_reloader();
 				}
 			} else {
-				css_refresh('link');
+				css_refresh(mainCssSelector);
 			}
 		};
 		if(location.hash === '#autoload') {
@@ -50,7 +50,7 @@
 	function auto_reloader() {
 		// With this hash you can have your css file 
 		// reloaded every 1 sec.
-		var styleSelectors = document.querySelectorAll(styleSelector),
+		var styleSelectors = document.querySelectorAll(mainCssSelector),
 			getCount = styleSelectors.length - 1, // -1 for 0 indexing
 			d = new Date().getTime();
 		for(var x = 0; x <= getCount; x++) {
