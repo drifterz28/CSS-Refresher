@@ -12,30 +12,27 @@
 		Rbutton.appendChild(Tbutton);
 		
 	window.onload = function() {
-		setTimeout(function() {
-			document.body.appendChild(Rbutton);
-			var refresh_btn = document.getElementById("refresh_link");
-				refresh_btn.onclick = function(e) {
-				console.log(e);
-				if(e.altKey === true) {
-					if(location.hash === '#autoload') {
-						clearInterval(setintRefresh);
-						refresh_btn.innerHTML = 'Refresh CSS';
-						location.hash = 'stopped';
-					} else {
-						refresh_btn.innerHTML = 'Autoload Running';
-						location.hash = 'autoload';
-						auto_reloader();
-					}
+		document.body.appendChild(Rbutton);
+		var refresh_btn = document.getElementById("refresh_link");
+			refresh_btn.onclick = function(e) {
+			if(e.altKey === true) {
+				if(location.hash === '#autoload') {
+					clearInterval(setintRefresh);
+					refresh_btn.innerHTML = 'Refresh CSS';
+					location.hash = 'stopped';
 				} else {
-					css_refresh('link');
+					refresh_btn.innerHTML = 'Autoload Running';
+					location.hash = 'autoload';
+					auto_reloader();
 				}
-			};
-			if(location.hash === '#autoload') {
-				refresh_btn.innerHTML = 'Autoload Running';
-				auto_reloader();
+			} else {
+				css_refresh('link');
 			}
-		}, 10);
+		};
+		if(location.hash === '#autoload') {
+			refresh_btn.innerHTML = 'Autoload Running';
+			auto_reloader();
+		}
 	};
 	
 	function css_refresh(selector) {
@@ -53,21 +50,21 @@
 	function auto_reloader() {
 		// With this hash you can have your css file 
 		// reloaded every 1 sec.
-			var styleSelectors = document.querySelectorAll(styleSelector),
-				getCount = styleSelectors.length - 1, // -1 for 0 indexing
-				d = new Date().getTime();
-			for(var x = 0; x <= getCount; x++) {
-				var oldElm = styleSelectors[x].getAttribute('href').split('?');
-				stylesheet = document.createElement('link');
-				stylesheet.rel = 'stylesheet';
-				stylesheet.type = 'text/css';
-				stylesheet.setAttribute('class', 'second_css');
-				stylesheet.href = oldElm[0] + '?' + d;
-				stylesheet.setAttribute('time', d);
-				document.getElementsByTagName('head')[0].appendChild(stylesheet);
-			}
-			setintRefresh = setInterval(function() {
-				css_refresh('.second_css');
-			}, reloadInt);
+		var styleSelectors = document.querySelectorAll(styleSelector),
+			getCount = styleSelectors.length - 1, // -1 for 0 indexing
+			d = new Date().getTime();
+		for(var x = 0; x <= getCount; x++) {
+			var oldElm = styleSelectors[x].getAttribute('href').split('?');
+			stylesheet = document.createElement('link');
+			stylesheet.rel = 'stylesheet';
+			stylesheet.type = 'text/css';
+			stylesheet.setAttribute('class', 'second_css');
+			stylesheet.href = oldElm[0] + '?' + d;
+			stylesheet.setAttribute('time', d);
+			document.getElementsByTagName('head')[0].appendChild(stylesheet);
+		}
+		setintRefresh = setInterval(function() {
+			css_refresh('.second_css');
+		}, reloadInt);
 	}
 })();
