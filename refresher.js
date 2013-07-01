@@ -16,17 +16,17 @@
 		var refresh_btn = document.getElementById("refresh_link");
 			refresh_btn.onclick = function(e) {
 			if(e.altKey === true) {
+				refresh_btn.innerHTML = 'Autoload Running';
+				location.hash = 'autoload';
+				auto_reloader();
+			} else {
 				if(location.hash === '#autoload') {
 					clearInterval(setintRefresh);
 					refresh_btn.innerHTML = 'Refresh CSS';
 					location.hash = 'stopped';
 				} else {
-					refresh_btn.innerHTML = 'Autoload Running';
-					location.hash = 'autoload';
-					auto_reloader();
+					css_refresh(mainCssSelector);
 				}
-			} else {
-				css_refresh(mainCssSelector);
 			}
 		};
 		if(location.hash === '#autoload') {
