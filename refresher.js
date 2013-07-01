@@ -7,7 +7,7 @@
 		Rbutton = document.createElement('button'),
 		Tbutton = document.createTextNode("Refresh CSS");
 		Rbutton.setAttribute('style', button_css);
-		Rbutton.setAttribute('title', 'Use Alt Click to auto refresh ever second');
+		Rbutton.setAttribute('title', 'Use Alt Click to auto refresh every second');
 		Rbutton.setAttribute('id', "refresh_link");
 		Rbutton.appendChild(Tbutton);
 		
